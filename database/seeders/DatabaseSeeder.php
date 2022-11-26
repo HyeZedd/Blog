@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
 
         //  \App\Models\Blog::factory()->count(10)->create();
 
-        $this->call(BlogSeeder::class);
+        //$this->call(BlogSeeder::class);
     }
 }
