@@ -19,7 +19,8 @@ class BlogSeeder extends Seeder
             [
                 'title' => 'Blog 1',
                 'content' => 'Content 1'
-            ]
+            ],
+            
         );
     }
 }

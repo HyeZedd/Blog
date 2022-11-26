@@ -27,7 +27,7 @@
                                         <td>{{ $blog->id }}</td>
                                         <td>{{ $blog->title }}</td>
                                         <td>{{ $blog->content }}</td>
-                                        <td>{{ $blog->user->name }}</td>
+                                        <td>{{ $blog->user_id ? $blog->user->name : '' }}</td>
                                         <td>{{ $blog->created_at }}</td>
                                         <td>{{ $blog->updated_at }}</td>
                                         <td>
@@ -39,6 +39,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $blogs->links() }}
                     </div>
                 </div>
             </div>

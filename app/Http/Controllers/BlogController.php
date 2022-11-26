@@ -9,7 +9,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(5);
         return view('blogs.index', compact('blogs'));
     }
 
@@ -36,7 +36,7 @@ class BlogController extends Controller
 
         auth()->user()->blogs()->create($request->only('title', 'content'));
 
-        return redirect()->route('blogs.index');
+        return redirect()->route('blogs.index')->with('success', 'Blog created successfully');
     }
 
     public function show(Blog $blog)
