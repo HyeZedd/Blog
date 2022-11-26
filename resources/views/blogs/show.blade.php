@@ -12,12 +12,13 @@
                         <div class="form-group">
                             <label for="title"> Title</label>
                             <input type="text" class="form-control" value="{{ $blog->title }}" id="title"
-                                name="title">
+                                name="title" readonly>
                         </div>
 
                         <div class="form-group">
                             <label for="content"> Content</label>
-                            <textarea type="text" class="form-control" value="{{ $blog->content }}" id="content" name="content" rows="3"> </textarea>
+                            <textarea type="text" class="form-control" value="{{ $blog->content }}" id="content" name="content" readonly
+                                rows="3"> </textarea>
                         </div>
 
 
