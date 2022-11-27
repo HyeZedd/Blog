@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Session\Session;
 
 class BlogController extends Controller
 {
@@ -34,7 +37,14 @@ class BlogController extends Controller
 
         //Method 3 
 
-        auth()->user()->blogs()->create($request->only('title', 'content'));
+        $blog = auth()->user()->blogs()->create($request->only('title', 'content'));
+
+        if ($request->hasFile('attachment')) {
+            $filename = $blog->id . '-' . date("Y-m-d") . '.' . $request->attachment->getClientOriginalExtension();
+            Storage::disk('public')->put($filename, File::get($request->attachment));
+            $blog->attachment = $filename;
+            $blog->save();
+        }
 
         return redirect()->route('blogs.index')->with('success', 'Blog created successfully');
     }
@@ -52,12 +62,15 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog)
     {
         $blog->update($request->only('title', 'content'));
-        return redirect()->route('blogs.index');
+        return redirect()->route('blogs.index')->with('success', 'Blog updated successfully');
     }
 
     public function delete(Blog $blog)
     {
+        if ($blog->attachment != null) {
+            Storage::disk('public')->delete($blog->attachment);
+        }
         $blog->delete();
-        return redirect()->route('blogs.index');
+        return redirect()->route('blogs.index')->with('warning', 'Blog deleted successfully');
     }
 }

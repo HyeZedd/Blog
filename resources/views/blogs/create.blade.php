@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Create Blog') }}</div>
 
                     <div class="card-body">
-                        <form action="{{ route('blogs.store') }}" method="POST">
+                        <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="title"> Title</label>
@@ -19,6 +19,12 @@
                                 <label for="content"> Content</label>
                                 <textarea type="text" class="form-control" id="content" name="content" rows="3"></textarea>
                             </div>
+
+                            <div class="form-group">
+                                <label for="attachment"> Attachment</label>
+                                <input type="file" class="form-control" id="attachment" name="attachment">
+                            </div>
+
 
                             <button class="btn btn-primary" type="submit">
                                 Submit

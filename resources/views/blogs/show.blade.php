@@ -20,6 +20,16 @@
                             <textarea type="text" class="form-control" value="{{ $blog->content }}" id="content" name="content" readonly
                                 rows="3"> </textarea>
                         </div>
+                        @if ($blog->attachment != '')
+                            <div class="form-group">
+                                <label for="title"> Attachment</label>
+                                <a href="{{ config('app.url') }}/storage//{{ $blog->attachment }}" target="_blank"
+                                    class="btn btn-primary mx-4" >Open
+                                    Attachment</a>
+                                {{-- <img src="{{ asset('storage/' . $blog->attachment) }}" alt="Attachment"
+                                    style="width: 100px"> --}}
+                            </div>
+                        @endif
 
 
                         <a href="{{ route('blogs.index') }}" class="btn btn-secondary">Cancel</a>
